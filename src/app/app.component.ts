@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 import { io } from 'socket.io-client';
 import golfResultSpec from '../golfResultSpec';
 import { z } from 'zod';
+import { AppResult } from './app.result';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, AppResult],
   templateUrl: './app.component.html',
 })
 export class AppComponent {

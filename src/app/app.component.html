@@ -31,11 +31,7 @@
           <th class="text-left px-2 border-x border-x-white">Score</th>
           <th class="text-left px-2 border-x border-x-white">STP</th>
         </thead>
-        <tr>
-          <td class="px-2">test</td>
-          <td class="px-2">test2</td>
-        </tr>
-
+        <tr app-result *ngFor="let result of results | keyvalue" [result]="result.value"  ></tr>
       </table>
     </div>
   </div>
