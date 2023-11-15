@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { io } from 'socket.io-client';
+import golfResultSpec from '../golfResultSpec';
+import { z } from 'zod';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +14,21 @@ import { io } from 'socket.io-client';
 export class AppComponent {
   @Input() socketURL = 'https://mst-full-stack-dev-test.herokuapp.com/';
   socket = io(this.socketURL);
+  results: { [MSTID: number]: z.infer<typeof golfResultSpec> } = {}
+
+  addResult(result: z.infer<typeof golfResultSpec>) {
+    this.results[result.MSTID] = result;
+    console.log(this.results);
+  }
+
   ngOnInit() {
-    this.socket.on('data-update', (golfer) => {
+    this.socket.on('data-update', (golfer: object) => {
       console.log(golfer);
+      try {
+        this.addResult(golfResultSpec.parse(golfer));
+      } catch {
+        console.error("Bad data received from server");
+      }
     });
   }
 }
