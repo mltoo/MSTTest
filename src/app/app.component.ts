@@ -15,6 +15,7 @@ export class AppComponent {
   @Input() socketURL = 'https://mst-full-stack-dev-test.herokuapp.com/';
   socket = io(this.socketURL);
   results: { [MSTID: number]: z.infer<typeof golfResultSpec> } = {}
+  holeNumbers = [...Array(18).keys()];
 
   addResult(result: z.infer<typeof golfResultSpec>) {
     this.results[result.MSTID] = result;

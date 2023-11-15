@@ -1,7 +1,42 @@
 <main class="">
-  <div class="">
-    <div class="text-red-500">
-      <p>Congratulations! Your app is running. 🎉</p>
+  <div class="mx-5">
+    <h1 class="text-xl font-bold my-5 ">Golf results:</h1>
+    <div class="overflow-x-scroll w-full">
+      <table class="table-auto">
+        <thead class="bg-zinc-700 text-white">
+          <tr>
+            <th *ngFor="let _ of [].constructor(14)" class="border-x border-x-white"></th>
+            <th *ngFor="let holeNum of holeNumbers" colspan="2" class="border-x border-x-white">Hole {{holeNum + 1}}
+            </th>
+            <th colspan="2" class="border-x border-x-white">Total</th>
+          </tr>
+          <th class="text-left px-2 border-x border-x-white">Name</th>
+          <th class="text-left px-2 border-x border-x-white">Sex</th>
+          <th class="text-left px-2 border-x border-x-white">Nationality</th>
+          <th class="text-left px-2 border-x border-x-white">Rank</th>
+          <th class="text-left px-2 border-x border-x-white">Handicap</th>
+          <th class="text-left px-2 border-x border-x-white">Match</th>
+          <th class="text-left px-2 border-x border-x-white">Tournament&nbsp;ID</th>
+          <th class="text-left px-2 border-x border-x-white">Match&nbsp;ID</th>
+          <th class="text-left px-2 border-x border-x-white">Round</th>
+          <th class="text-left px-2 border-x border-x-white">Holes&nbsp;Played</th>
+          <th class="text-left px-2 border-x border-x-white">In&nbsp;STP</th>
+          <th class="text-left px-2 border-x border-x-white">In&nbsp;Strokes</th>
+          <th class="text-left px-2 border-x border-x-white">Out&nbsp;Strokes</th>
+          <th class="text-left px-2 border-x border-x-white">Out&nbsp;Strokes</th>
+          <ng-container *ngFor="let _ of holeNumbers">
+            <th class="text-left px-2 border-x border-x-white">Score</th>
+            <th class="text-left px-2 border-x border-x-white">STP</th>
+          </ng-container>
+          <th class="text-left px-2 border-x border-x-white">Score</th>
+          <th class="text-left px-2 border-x border-x-white">STP</th>
+        </thead>
+        <tr>
+          <td class="px-2">test</td>
+          <td class="px-2">test2</td>
+        </tr>
+
+      </table>
     </div>
   </div>
 </main>
