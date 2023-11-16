@@ -1,12 +1,14 @@
 <main class="">
   <div class="mx-5">
     <h1 class="text-xl font-bold my-5 ">Golf results:</h1>
-    <div class="overflow-x-scroll w-full">
+    <div class="overflow-x-scroll w-full mb-5">
       <table class="table-auto">
         <thead class="bg-zinc-700 text-white">
           <tr>
             <th *ngFor="let _ of [].constructor(14)" class="border-x border-x-white"></th>
-            <th *ngFor="let holeNum of holeNumbers" colspan="2" class="border-x border-x-white">Hole {{holeNum + 1}}
+            <th *ngFor="let _ of [].constructor(holeCount); let holeNum=index" colspan="2"
+              class="border-x border-x-white">
+              Hole {{holeNum + 1}}
             </th>
             <th colspan="2" class="border-x border-x-white">Total</th>
           </tr>
@@ -24,14 +26,17 @@
           <th class="text-left px-2 border-x border-x-white">In&nbsp;Strokes</th>
           <th class="text-left px-2 border-x border-x-white">Out&nbsp;Strokes</th>
           <th class="text-left px-2 border-x border-x-white">Out&nbsp;Strokes</th>
-          <ng-container *ngFor="let _ of holeNumbers">
+          <ng-container *ngFor="let _ of [].constructor(holeCount)">
             <th class="text-left px-2 border-x border-x-white">Score</th>
             <th class="text-left px-2 border-x border-x-white">STP</th>
           </ng-container>
           <th class="text-left px-2 border-x border-x-white">Score</th>
           <th class="text-left px-2 border-x border-x-white">STP</th>
         </thead>
-        <tr app-result *ngFor="let result of results | keyvalue" [result]="result.value"  ></tr>
+        <tbody>
+          <tr app-result class="even:bg-zinc-300 odd:bg-white" *ngFor="let result of results | keyvalue"
+            [result]="result.value"></tr>
+        </tbody>
       </table>
     </div>
   </div>

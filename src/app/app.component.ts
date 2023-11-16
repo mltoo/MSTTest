@@ -12,10 +12,12 @@ import { AppResult } from './app.result';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
+  @Input() holeCount = 18;
   @Input() socketURL = 'https://mst-full-stack-dev-test.herokuapp.com/';
   socket = io(this.socketURL);
+
+  restrictedLengthResults = golfResultSpec.refine((result) => result.holeData.length == this.holeCount );
   results: { [MSTID: number]: z.infer<typeof golfResultSpec> } = {}
-  holeNumbers = [...Array(18).keys()];
 
   addResult(result: z.infer<typeof golfResultSpec>) {
     this.results[result.MSTID] = result;
@@ -26,9 +28,9 @@ export class AppComponent {
     this.socket.on('data-update', (golfer: object) => {
       console.log(golfer);
       try {
-        this.addResult(golfResultSpec.parse(golfer));
-      } catch {
-        console.error("Bad data received from server");
+        this.addResult(this.restrictedLengthResults.parse(golfer));
+      } catch(e) {
+        console.log(e);
       }
     });
   }

@@ -13,42 +13,10 @@
 <td>{{result.InStrokes}}</td>
 <td>{{result.OutStrokes}}</td>
 
-<td>{{result.Hole1Strokes}}</td>
-<td>{{result.Hole1STP}}</td>
-<td>{{result.Hole2Strokes}}</td>
-<td>{{result.Hole2STP}}</td>
-<td>{{result.Hole3Strokes}}</td>
-<td>{{result.Hole3STP}}</td>
-<td>{{result.Hole4Strokes}}</td>
-<td>{{result.Hole4STP}}</td>
-<td>{{result.Hole5Strokes}}</td>
-<td>{{result.Hole5STP}}</td>
-<td>{{result.Hole6Strokes}}</td>
-<td>{{result.Hole6STP}}</td>
-<td>{{result.Hole7Strokes}}</td>
-<td>{{result.Hole7STP}}</td>
-<td>{{result.Hole8Strokes}}</td>
-<td>{{result.Hole8STP}}</td>
-<td>{{result.Hole9Strokes}}</td>
-<td>{{result.Hole9STP}}</td>
-<td>{{result.Hole10Strokes}}</td>
-<td>{{result.Hole10STP}}</td>
-<td>{{result.Hole11Strokes}}</td>
-<td>{{result.Hole11STP}}</td>
-<td>{{result.Hole12Strokes}}</td>
-<td>{{result.Hole12STP}}</td>
-<td>{{result.Hole13Strokes}}</td>
-<td>{{result.Hole13STP}}</td>
-<td>{{result.Hole14Strokes}}</td>
-<td>{{result.Hole14STP}}</td>
-<td>{{result.Hole15Strokes}}</td>
-<td>{{result.Hole15STP}}</td>
-<td>{{result.Hole16Strokes}}</td>
-<td>{{result.Hole16STP}}</td>
-<td>{{result.Hole17Strokes}}</td>
-<td>{{result.Hole17STP}}</td>
-<td>{{result.Hole18Strokes}}</td>
-<td>{{result.Hole18STP}}</td>
+<ng-container *ngFor="let hole of result.holeData">
+  <td>{{hole.Strokes}}</td>
+  <td>{{hole.STP}}</td>
+</ng-container>
 
 <td>{{result.TotalStrokes}}</td>
 <td>{{result.TotalSTP}}</td>
