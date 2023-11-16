@@ -5,37 +5,29 @@
       <table class="table-auto">
         <thead class="bg-zinc-700 text-white">
           <tr>
-            <th *ngFor="let _ of [].constructor(14)" class="border-x border-x-white"></th>
+            <th *ngFor="let col of columns" class="border-x border-x-white"
+              (click)="compareCol == col ? compareAsc = !compareAsc : compareCol = col"
+              [ngClass]="{'bg-zinc-500' : compareCol == col}"></th>
             <th *ngFor="let _ of [].constructor(holeCount); let holeNum=index" colspan="2"
               class="border-x border-x-white">
               Hole {{holeNum + 1}}
             </th>
             <th colspan="2" class="border-x border-x-white">Total</th>
           </tr>
-          <th class="text-left px-2 border-x border-x-white">Name</th>
-          <th class="text-left px-2 border-x border-x-white">Sex</th>
-          <th class="text-left px-2 border-x border-x-white">Nationality</th>
-          <th class="text-left px-2 border-x border-x-white">Rank</th>
-          <th class="text-left px-2 border-x border-x-white">Handicap</th>
-          <th class="text-left px-2 border-x border-x-white">Match</th>
-          <th class="text-left px-2 border-x border-x-white">Tournament&nbsp;ID</th>
-          <th class="text-left px-2 border-x border-x-white">Match&nbsp;ID</th>
-          <th class="text-left px-2 border-x border-x-white">Round</th>
-          <th class="text-left px-2 border-x border-x-white">Holes&nbsp;Played</th>
-          <th class="text-left px-2 border-x border-x-white">In&nbsp;STP</th>
-          <th class="text-left px-2 border-x border-x-white">In&nbsp;Strokes</th>
-          <th class="text-left px-2 border-x border-x-white">Out&nbsp;Strokes</th>
-          <th class="text-left px-2 border-x border-x-white">Out&nbsp;Strokes</th>
-          <ng-container *ngFor="let _ of [].constructor(holeCount)">
-            <th class="text-left px-2 border-x border-x-white">Score</th>
-            <th class="text-left px-2 border-x border-x-white">STP</th>
-          </ng-container>
-          <th class="text-left px-2 border-x border-x-white">Score</th>
-          <th class="text-left px-2 border-x border-x-white">STP</th>
+
+          <tr>
+            <th *ngFor="let col of columns.concat(holeStatColumns)"
+              (click)="compareCol == col ? compareAsc = !compareAsc : compareCol = col"
+              class="whitespace-nowrap text-left px-2 border-x border-x-white"
+              [ngClass]="{'bg-zinc-500' : compareCol == col}">
+              {{col[0]}} {{compareCol==col ? compareAsc ? "▾" : "▴" : ""}}
+            </th>
+          </tr>
         </thead>
         <tbody>
-          <tr app-result class="even:bg-zinc-300 odd:bg-white" *ngFor="let result of results | keyvalue"
-            [result]="result.value"></tr>
+          <tr app-result class="even:bg-zinc-300 odd:bg-white"
+            *ngFor="let result of results | keyvalue:getResultComparator(compareCol, compareAsc)"
+            [result]="result.value" [columns]="columns.concat(holeStatColumns)"></tr>
         </tbody>
       </table>
     </div>

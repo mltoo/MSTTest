@@ -8,11 +8,9 @@ import { z } from 'zod';
   selector: '[app-result]',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
-  templateUrl: './app.result.html',
-  styleUrl: './app.result.css'
+  templateUrl: './app.result.html'
 })
 export class AppResult {
   @Input({ required: true }) result!: z.infer<typeof golfResultSpec>;
-  //@Input({}) index!: number;
-
+  @Input({ required: true }) columns!: [string, (result: z.infer<typeof golfResultSpec>) => any][]
 }
