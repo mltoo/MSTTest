@@ -18,8 +18,16 @@ export class AppComponent {
   @Input() socketURL = 'https://mst-full-stack-dev-test.herokuapp.com/';
   socket = io(this.socketURL);
 
-  columns: [string, (result: GolfResult) => any][] = [
-    ["Name", r => r.First],
+  columns: [heading: string, getter: (result: GolfResult) => any][] = [
+    ["Name", r => {
+      if (r.First == r.TVName) {
+        return r.First.toUpperCase() + " " + r.Last;
+      } else if (r.Last == r.TVName) {
+        return r.First + " " + r.Last.toUpperCase();
+      } else {
+        return r.First + ' "' + r.TVName.toUpperCase() + '" ' + r.Last;
+      }
+    }],
     ["Sex", r => r.Sex],
     ["Nationality", r => r.Nationality],
     ["Rank", r => r.CalculatedRankInteger],
@@ -33,6 +41,7 @@ export class AppComponent {
     ["In Strokes", r => r.InStrokes],
     ["Out Strokes", r => r.OutStrokes],
   ]
+  //appropriate number of holeStat columns generated dynamically in constructor
   holeStatColumns: [string, (result: GolfResult) => any][] = []
   compareCol: [string, (result: GolfResult) => any] = this.columns[3];
   compareAsc = false;
