@@ -51,19 +51,18 @@ export class AppComponent {
     //Total Stroke/STP columns:
     this.holeStatColumns[2 * this.holeCount] = ["Strokes", r => r.TotalStrokes];
     this.holeStatColumns[2 * this.holeCount + 1] = ["STP", r => r.TotalSTP];
-    console.log(this.holeStatColumns);
   }
 
   restrictedLengthResults = golfResultSpec.refine((result) => result.holeData.length == this.holeCount);
   results: { [MSTID: number]: GolfResult } = {}
   addResult(result: z.infer<typeof golfResultSpec>) {
-    this.results[result.MSTID] = result;
-    console.log(this.results);
+    if (!this.results[result.MSTID] || result.lastUpdated > this.results[result.MSTID]?.lastUpdated) {
+      this.results[result.MSTID] = result;
+    }
   }
 
   ngOnInit() {
     this.socket.on('data-update', (golfer: object) => {
-      console.log(golfer);
       try {
         this.addResult(this.restrictedLengthResults.parse(golfer));
       } catch (e) {

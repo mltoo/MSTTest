@@ -27,7 +27,7 @@ export default z.object({}).passthrough().transform((entries: object, ctx) => {
         let holeNumber: number = +key.substring(
           "Hole".length, key.length - "Strokes".length);
         maxHoleNum = Math.max(holeNumber, maxHoleNum);
-        holeData[holeNumber-1] = {
+        holeData[holeNumber - 1] = {
           Strokes: entries[key as keyof typeof entries],
           STP: entries[stpKey as keyof typeof entries]
         };
@@ -74,12 +74,12 @@ export default z.object({}).passthrough().transform((entries: object, ctx) => {
 
   holesPlayed: z.number(),
 
-  lastUpdated: z.string(), //TODO: validate time format
+  lastUpdated: z.string().regex(/^[0-9][0-9]:[0-9][0-9].[0-9]$/),
 
   matchID: z.number(),
   position: z.number(),
   tournamentID: z.number(),
-  teeTime: z.string(), //TODO: validate time format
+  teeTime: z.string().regex(/^[0-9][0-9]:[0-9][0-9].[0-9]$/),
   round: z.number()
 
 }))
